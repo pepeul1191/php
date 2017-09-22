@@ -1,2 +1,3 @@
 app/vendor
 /.bzr
+public/bower_components
