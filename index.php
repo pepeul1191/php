@@ -11,7 +11,7 @@ header('Content-type: text/html; charset=UTF-8');
 
 define('KEY', '9fo0lOias2f6Z');
 
-Configuration::init( realpath(dirname(__FILE__)) . '/app/', 'http://localhost/ubicaciones/', realpath(dirname(__FILE__) . '/db/' . 'db_ubicaciones.db'));
+Configuration::init( realpath(dirname(__FILE__)) . '/app/', 'http://localhost/parcial/', realpath(dirname(__FILE__) . '/db/' . 'db_ubicaciones.db'));
 
 Flight::set('flight.views.path', 'app/views');
 
@@ -34,12 +34,12 @@ Flight::route('POST /encode', array('CipherController','encode'));
 Flight::route('POST /decode', array('CipherController','decode'));
 
 Flight::route('GET /login', array('ParcialController','login'));
-
+/*
 Flight::map('notFound', function(){
 	header('HTTP/1.0 404 Not Found');
 	Flight::redirect('/error/404');
 });
-
+*/
 Flight::start();
 
 ?>
