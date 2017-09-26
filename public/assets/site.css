@@ -5,5 +5,5 @@ label{font-weight: 300}
 .form-control{border-radius: 0px;}
 table > tbody > tr > td > i:hover{cursor: pointer;}
 td>input{ background: transparent;border: none;}
-td>i{margin-left: 20px}
+td>i{margin-left: 10px}
 .btn>i{margin-right: 10px}
