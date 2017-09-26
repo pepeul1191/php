@@ -24,23 +24,23 @@ Servicio web desarrollado en PHP usando el framework FlightPHP, con patrones de 
 
 ### SERVICIOS
 
-+ (1) POST : usuario/correo_repetido
-+ (2) POST : usuario/usuario_repetido
-+ (3) POST : cipher/encode
-+ (4) POST : usuario/guardar
-+ (5) POST : usuario/validar
++ (1) POST : usuario/correo_repetido?correo=@correo
++ (2) POST : usuario/usuario_repetido?correo=@usuario
++ (3) POST : cipher/encode?texto=@texto
++ (4) POST : usuario/guardar?data=@json_string[usuario, correo, contrasenia]
++ (5) POST : usuario/validar?usuario=@usuario&contrasenia=@contrasenia
 + (6) GET : departamento/listar
-+ (7) POST : departamento/crear
-+ (8) POST : departamento/editar
-+ (9) POST : departamento/eliminar
++ (7) POST : departamento/crear?nombre=@nombre
++ (8) POST : departamento/editar?id=@id&nombre=@nombre
++ (9) POST : departamento/eliminar?id=@id
 + (10) GET : provincia/listar/@departamento_id
-+ (11) POST : provincia/crear
-+ (12) POST : provincia/editar
-+ (13) POST : provincia/eliminar
++ (11) POST : provincia/crear?departamento_id=@departamento_id&nombre=@nombre
++ (12) POST : provincia/editar?id=@id&nombre=@nombre
++ (13) POST : provincia/eliminar?id=@id
 + (14) GET : distrito/listar/@provincia_id
-+ (15) POST : distrito/crear
-+ (16) POST : distrito/editar
-+ (17) POST : distrito/eliminar
++ (15) POST : distrito/crear?provincia_id=@provincia_id&nombre=@nombre
++ (16) POST : distrito/editar?id=@id&nombre=@nombre
++ (17) POST : distrito/eliminar?id=@id
 
 ### PREGUNTAS
 
