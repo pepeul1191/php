@@ -24,8 +24,8 @@ Servicio web desarrollado en PHP usando el framework FlightPHP, con patrones de 
 
 ### SERVICIOS
 
-+ (1) POST : validar/correo_repetido
-+ (2) POST : validar/usuario_repetido
++ (1) POST : usuario/correo_repetido
++ (2) POST : usuario/usuario_repetido
 + (3) POST : cipher/encode
 + (4) POST : usuario/guardar
 + (5) POST : usuario/validar

@@ -23,11 +23,20 @@ Flight::route('GET /error/404', array('ErrorController','error_404'));
 //Flight::route('POST /distrito/guardar', array('DistritoController','guardar'));
 //Flight::route('GET /distrito/buscar', array('DistritoController','buscar'));
 //Flight::route('GET /distrito/buscar_vista/@distrito_id', array('DistritoController','buscar_vista'));
-Flight::route('GET /key', array('CipherController','key'));
-Flight::route('POST /encode', array('CipherController','encode'));
-Flight::route('POST /decode', array('CipherController','decode'));
+//Flight::route('GET /key', array('CipherController','key'));
+//Flight::route('POST /encode', array('CipherController','encode'));
+//Flight::route('POST /decode', array('CipherController','decode'));
+
+#VISTAS
 Flight::route('GET /login', array('ParcialController','login'));
 Flight::route('GET /home', array('ParcialController','home'));
+#LOGIN
+Flight::route('POST /usuario/correo_repetido', array('UsuarioController','correo_repetido'));
+Flight::route('POST /usuario/usuario_repetido', array('UsuarioController','usuario_repetido'));
+Flight::route('POST /cipher/encode', array('CipherController','encode'));
+Flight::route('POST /usuario/guardar', array('UsuarioController','guardar'));
+Flight::route('POST /usuario/validar', array('UsuarioController','validar'));
+#UBICACIONES
 Flight::route('GET /departamento/listar', array('DepartamentoController','listar'));
 Flight::route('POST /departamento/crear', array('DepartamentoController','crear'));
 Flight::route('POST /departamento/editar', array('DepartamentoController','editar'));
@@ -40,7 +49,6 @@ Flight::route('GET /distrito/listar/@provincia_id', array('DistritoController','
 Flight::route('POST /distrito/crear', array('DistritoController','crear'));
 Flight::route('POST /distrito/editar', array('DistritoController','editar'));
 Flight::route('POST /distrito/eliminar', array('DistritoController','eliminar'));
-
 
 /*
 Flight::map('notFound', function(){

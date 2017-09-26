@@ -25,7 +25,7 @@
                         <br>
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox"> Acepto los Términos y Condiciones
+                                <input type="checkbox" id="chkTerminosCondiciones"> Acepto los Términos y Condiciones
                             </label>
                         </div>
                     </div>
@@ -33,25 +33,25 @@
                         <h4>Formulario de Registro</h4>
                         <div class="form-group">
                             <label for="txtCorreo">Correo</label>
-                            <input type="text" class="form-control" id="txtCorreo">
+                            <input type="text" disabled class="form-control" id="txtCorreo">
                         </div>
                         <div class="form-group">
                             <label for="txtCorreoRepetido">Correo Repetir</label>
-                            <input type="text" class="form-control" id="txtCorreoRepetido">
+                            <input type="text" disabled class="form-control" id="txtCorreoRepetido">
                         </div>
                         <div class="form-group">
                             <label for="txtUsuario">Usuario</label>
-                            <input type="text" class="form-control" id="txtUsuario">
+                            <input type="text" disabled class="form-control" id="txtUsuario">
                         </div>
                         <div class="form-group">
                             <label for="txtContrasenia">Contraseña</label>
-                            <input type="text" class="form-control" id="txtContrasenia">
+                            <input type="text" disabled class="form-control" id="txtContrasenia">
                         </div>
                         <div class="form-group">
                             <label for="txtContraseniaRepetir">Repetir Contraseña</label>
-                            <input type="text" class="form-control" id="txtContraseniaRepetir">
+                            <input type="text" disabled class="form-control" id="txtContraseniaRepetir">
                         </div>
-                        <button type="button" class="btn btn-success" id="btnGuardar">Guardar Cambios</button>
+                        <button type="button" disabled class="btn btn-success" id="btnGuardar">Guardar Cambios</button>
                     </div>
                 </div>
             </div>
