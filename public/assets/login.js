@@ -55,15 +55,37 @@ $('#txtCorreo').on('keyup', function(event) {
 	});
 });
 
+$('#txtCorreo').on('focusout', function(event) {
+	var correo = $(event.currentTarget).val();
+	var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	var rpta = re.test(correo);
+
+	if(rpta == false){
+		$('#mensajeCorreo').html('Correo ingresado no es de un formato válido');
+		$('#mensajeCorreo').removeClass('oculto');
+	}else{
+		$('#mensajeCorreo').html('');
+		$('#mensajeCorreo').addClass('oculto');
+	}
+});
+
 $('#txtCorreoRepetido').on('focusout', function(event) {;
 	var correo = $(txtCorreo).val();
 	var correo_repetido = $(txtCorreoRepetido).val();
-	if(correo != correo_repetido){
-		$('#mensajeCorreoRepetido').html('El correo ingresado no coincide con el primero');
+	var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	var rpta = re.test(correo_repetido);
+
+	if(rpta == false){
+		$('#mensajeCorreoRepetido').html('Correo ingresado no es de un formato válido');
 		$('#mensajeCorreoRepetido').removeClass('oculto');
 	}else{
-		$('#mensajeCorreoRepetido').html('');
-		$('#mensajeCorreoRepetido').addClass('oculto');
+		if(correo != correo_repetido){
+			$('#mensajeCorreoRepetido').html('El correo ingresado no coincide con el primero');
+			$('#mensajeCorreoRepetido').removeClass('oculto');
+		}else{
+			$('#mensajeCorreoRepetido').html('');
+			$('#mensajeCorreoRepetido').addClass('oculto');
+		}
 	}
 });
 

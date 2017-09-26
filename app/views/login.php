@@ -49,12 +49,12 @@
                         <div class="form-group">
                             <label for="txtContrasenia">Contraseña</label>
                             <label id="mensajeContrasenia" class="oculto mensaje-error error"></label>
-                            <input type="text" disabled class="form-control" id="txtContrasenia">
+                            <input type="password" disabled class="form-control" id="txtContrasenia">
                         </div>
                         <div class="form-group">
                             <label for="txtContraseniaRepetir">Repetir Contraseña</label>
                             <label id="mensajeContraseniaRepetir" class="oculto mensaje-error error"></label>
-                            <input type="text" disabled class="form-control" id="txtContraseniaRepetir">
+                            <input type="password" disabled class="form-control" id="txtContraseniaRepetir">
                         </div>
                         <button type="button" disabled class="btn btn-success" id="btnGuardar">Guardar Cambios</button>
                     </div>
