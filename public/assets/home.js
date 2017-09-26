@@ -70,6 +70,12 @@ $(document).on('click', '.fa', function(event) {
 	    	editarDepartamento(departamentoId, departamentoNombre);
 			break;
 		//Inicio tabla provincia
+		case 'crearProvincia':
+			var provinciaNombre = $(event.currentTarget).parent().parent().children().eq(1).children().val();
+	   		var fila = $(event.currentTarget).parent().parent();
+	   		var departamentoId = $('#departamentoId').html();
+	   		crearProvincia(provinciaNombre, departamentoId, fila);
+			break;
 		case 'eliminarProvincia':
 			var provinciaId = $(event.currentTarget).parent().parent().children().eq(0).html();
 	    	var fila = $(event.currentTarget).parent().parent();
@@ -198,6 +204,30 @@ function cargarProvincia(departamentoId){
 			rpta = rpta + '<tfoot><tr><td  colspan="3"><button class="btn btn-primary" id="btnAgregarProvincia"><i class="fa fa-plus" aria-hidden="true"></i>Agregar Provincia</button></tr></td></tfoot>';
 	   		
 	   		$('#provincias').append(rpta);
+	   }
+	});
+}
+
+function crearProvincia(provinciaNombre, departamentoId, fila){
+	$.ajax({
+	   url: BASE_URL + 'provincia/crear?departamento_id=' + departamentoId+ '&nombre=' + provinciaNombre, 
+	   type: "POST", 
+	   async: false, 
+	   success: function(data) {
+	   		var rpta = JSON.parse(data);
+	   		
+	   		fila.children().eq(0).html(rpta['mensaje'][1]);
+	   		fila.children().eq(2).empty();
+	   		fila.children().eq(2).append('<i class="fa fa-search" aria-hidden="true" operacion="cargarDistrito"></i><i class="fa fa-pencil" aria-hidden="true" operacion="editarProvincia"></i><i class="fa fa-times" aria-hidden="true" operacion="eliminarProvincia"></i>');
+
+	   		$('#provinciasMensaje').html(rpta['mensaje'][0]);
+	   		if(rpta['tipo_mensaje']=='error'){
+	   			$('#provinciasMensaje').removeClass('success');
+	   			$('#provinciasMensaje').addClass('error');
+	   		}else{
+	   			$('#provinciasMensaje').removeClass('error');
+	   			$('#provinciasMensaje').addClass('success');
+	   		}			   		
 	   }
 	});
 }
