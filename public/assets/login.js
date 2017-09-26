@@ -101,8 +101,10 @@ $('#txtUsuario').on('keyup', function(event) {
 
 	   		if(rpta['mensaje'][0] == 1){
 	   			$('#mensajeUsuario').html('Usuario ingresado ya se encuentra en uso');
+	   			$('#mensajeUsuario').removeClass('oculto');
 	   		}else{
 	   			$('#mensajeUsuario').html('');
+	   			$('#mensajeUsuario').addClass('oculto');
 	   		}
 	   }
 	});
