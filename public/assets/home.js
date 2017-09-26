@@ -7,12 +7,12 @@ $(document).ready(function() {
 	   async: false, 
 	   success: function(data) {
 	   		var departamentos = JSON.parse(data);
-	   		var rpta =  '<thead><tr><th>id</th><th>Nombre</th><th>Operaciones</th></tr></thead>';
+	   		var rpta =  '<thead><tr><th class="oculto">id</th><th>Nombre</th><th>Operaciones</th></tr></thead>';
 	   		rpta = rpta + '<tbody>';
 	   		for (var i = 0; i < departamentos.length; i++) {
 			  	rpta = rpta + '<tr>';
 			  	var operaciones = '<td><i class="fa fa-search" aria-hidden="true" operacion="cargarProvincia"></i><i class="fa fa-pencil" aria-hidden="true" operacion="editarDepartamento"></i><i class="fa fa-times" aria-hidden="true" operacion="eliminarDepartamento"></i></td>';
-			  	rpta = rpta + '<td>' + departamentos[i]['id'] + '</td><td>' + '<input type="text" value="'+ departamentos[i]['nombre'] + '">' +'</td>' + operaciones;
+			  	rpta = rpta + '<td class="oculto">' + departamentos[i]['id'] + '</td><td>' + '<input type="text" value="'+ departamentos[i]['nombre'] + '">' +'</td>' + operaciones;
 			  	rpta = rpta + '</tr>';
 			}
 			rpta = rpta + '</tbody>';
@@ -29,15 +29,15 @@ $(document).on('click', '.btn', function(event) {
 	switch(id_boton) {
   		//Inicio tabla departamento
 	    case 'btnAgregarDepartamento':
-	   		var fila = '<tr><td><label></label></td><td><input type="text"></td><td><i class="fa fa-plus" aria-hidden="true" operacion="crearDepartamento"></i><i class="fa fa-times" aria-hidden="true" operacion="eliminarFila"></i></td></tr>'; 
+	   		var fila = '<tr><td class="oculto"><label></label></td><td><input type="text"></td><td><i class="fa fa-plus" aria-hidden="true" operacion="crearDepartamento"></i><i class="fa fa-times" aria-hidden="true" operacion="eliminarFila"></i></td></tr>'; 
 	   		$('#departamentos tbody').append(fila);
 			break;
 	    case 'btnAgregarProvincia':
-	    	var fila = '<tr><td><label></label></td><td><input type="text"></td><td><i class="fa fa-plus" aria-hidden="true" operacion="crearProvincia"></i><i class="fa fa-times" aria-hidden="true" operacion="eliminarFila"></i></td></tr>'; 
+	    	var fila = '<tr><td class="oculto"><label></label></td><td><input type="text"></td><td><i class="fa fa-plus" aria-hidden="true" operacion="crearProvincia"></i><i class="fa fa-times" aria-hidden="true" operacion="eliminarFila"></i></td></tr>'; 
 	   		$('#provincias tbody').append(fila);
 			break;
 		case 'btnAgregarDistrito':
-			var fila = '<tr><td><label></label></td><td><input type="text"></td><td><i class="fa fa-plus" aria-hidden="true" operacion="crearDistrito"></i><i class="fa fa-times" aria-hidden="true" operacion="eliminarFila"></i></td></tr>'; 
+			var fila = '<tr><td class="oculto"><label></label></td><td><input type="text"></td><td><i class="fa fa-plus" aria-hidden="true" operacion="crearDistrito"></i><i class="fa fa-times" aria-hidden="true" operacion="eliminarFila"></i></td></tr>'; 
 	   		$('#distritos tbody').append(fila);
 			break;
 	    default:
@@ -198,12 +198,12 @@ function cargarProvincia(departamentoId){
 	   async: false, 
 	   success: function(data) {
 	   		var provincias = JSON.parse(data);
-	   		var rpta =  '<thead><tr><th>id</th><th>Nombre</th><th>Operaciones</th></tr></thead>';
+	   		var rpta =  '<thead><tr><th class="oculto">id</th><th>Nombre</th><th>Operaciones</th></tr></thead>';
 	   		rpta = rpta + '<tbody>';
 	   		for (var i = 0; i < provincias.length; i++) {
 			  	rpta = rpta + '<tr>';
 			  	var operaciones = '<td><i class="fa fa-search" aria-hidden="true" operacion="cargarDistrito"></i><i class="fa fa-pencil" aria-hidden="true" operacion="editarProvincia"></i><i class="fa fa-times" aria-hidden="true" operacion="eliminarProvincia"></i></td>';
-			  	rpta = rpta + '<td>' + provincias[i]['id'] + '</td><td>' + '<input type="text" value="'+ provincias[i]['nombre'] + '">' +'</td>' + operaciones;
+			  	rpta = rpta + '<td class="oculto">' + provincias[i]['id'] + '</td><td>' + '<input type="text" value="'+ provincias[i]['nombre'] + '">' +'</td>' + operaciones;
 			  	rpta = rpta + '</tr>';
 			}
 			rpta = rpta + '</tbody>';
@@ -316,12 +316,12 @@ function cargarDistrito(provinciaId){
 	   async: false, 
 	   success: function(data) {
 	   		var distritos = JSON.parse(data);
-	   		var rpta =  '<thead><tr><th>id</th><th>Nombre</th><th>Operaciones</th></tr></thead>';
+	   		var rpta =  '<thead><tr><th class="oculto">id</th><th>Nombre</th><th>Operaciones</th></tr></thead>';
 	   		rpta = rpta + '<tbody>';
 	   		for (var i = 0; i < distritos.length; i++) {
 			  	rpta = rpta + '<tr>';
 			  	var operaciones = '<td style="padding-left:20px;"><i class="fa fa-pencil" aria-hidden="true" operacion="editarDistrito"></i><i class="fa fa-times" aria-hidden="true" operacion="eliminarDistrito"></i></td>';
-			  	rpta = rpta + '<td>' + distritos[i]['id'] + '</td><td>' + '<input type="text" value="'+ distritos[i]['nombre'] + '">' +'</td>' + operaciones;
+			  	rpta = rpta + '<td class="oculto">' + distritos[i]['id'] + '</td><td>' + '<input type="text" value="'+ distritos[i]['nombre'] + '">' +'</td>' + operaciones;
 			  	rpta = rpta + '</tr>';
 			}
 			rpta = rpta + '</tbody>';
