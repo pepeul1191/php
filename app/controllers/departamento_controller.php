@@ -19,7 +19,7 @@ class DepartamentoController extends Controller
 			$departamento->save();
 			$id_generado = $departamento->id();
 			$rpta['tipo_mensaje'] = 'success';
-        	$rpta['mensaje'] = ['Se ha editado un departamento', $id_generado];
+        	$rpta['mensaje'] = ['Se ha creado un departamento', $id_generado];
 		} catch (Exception $e) {
 		    #echo 'Excepción capturada: ',  $e->getMessage(), "\n";
 		    $rpta['tipo_mensaje'] = 'error';

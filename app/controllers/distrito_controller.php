@@ -76,7 +76,7 @@ class DistritoController extends Controller
 			$distrito->save();
 			$id_generado = $distrito->id();
 			$rpta['tipo_mensaje'] = 'success';
-        	$rpta['mensaje'] = ['Se ha editado un distrito', $id_generado];
+        	$rpta['mensaje'] = ['Se ha creado un distrito', $id_generado];
 		} catch (Exception $e) {
 		    #echo 'Excepción capturada: ',  $e->getMessage(), "\n";
 		    $rpta['tipo_mensaje'] = 'error';

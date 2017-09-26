@@ -66,7 +66,7 @@ class ProvinciaController extends Controller
 			$provincia->save();
 			$id_generado = $provincia->id();
 			$rpta['tipo_mensaje'] = 'success';
-        	$rpta['mensaje'] = ['Se ha editado un provincia', $id_generado];
+        	$rpta['mensaje'] = ['Se ha creado un provincia', $id_generado];
 		} catch (Exception $e) {
 		    #echo 'Excepción capturada: ',  $e->getMessage(), "\n";
 		    $rpta['tipo_mensaje'] = 'error';
