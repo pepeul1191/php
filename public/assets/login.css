@@ -17,4 +17,4 @@ body { background: #76b852;  fallback for old browsers */
   background: -webkit-linear-gradient(right, #76b852, #8DC26F); background: -moz-linear-gradient(right, #76b852, #8DC26F); background: -o-linear-gradient(right, #76b852, #8DC26F); background: linear-gradient(to left, #76b852, #8DC26F); -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
 
   #btnGuardar{width: 100%;  margin-bottom: 20px}
-  .mensaje-error{margin-left: 15px}
+  .mensaje-error{width: 100%}

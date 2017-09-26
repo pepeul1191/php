@@ -33,27 +33,27 @@
                         <h4>Formulario de Registro</h4>
                         <div class="form-group">
                             <label for="txtCorreo">Correo</label>
-                            <label id="mensajeCorreo" class="mensaje-error error"></label>
+                            <label id="mensajeCorreo" oculto class="oculto mensaje-error error"></label>
                             <input type="text" disabled class="form-control" id="txtCorreo">
                         </div>
                         <div class="form-group">
                             <label for="txtCorreoRepetido">Correo Repetir</label>
-                            <label id="mensajeCorreoRepetido" class="mensaje-error error"></label>
+                            <label id="mensajeCorreoRepetido" class="oculto mensaje-error error"></label>
                             <input type="text" disabled class="form-control" id="txtCorreoRepetido">
                         </div>
                         <div class="form-group">
                             <label for="txtUsuario">Usuario</label>
-                            <label id="mensajeUsuario" class="mensaje-error error"></label>
+                            <label id="mensajeUsuario" class="oculto mensaje-error error"></label>
                             <input type="text" disabled class="form-control" id="txtUsuario">
                         </div>
                         <div class="form-group">
                             <label for="txtContrasenia">Contraseña</label>
-                            <label id="mensajeContrasenia" class="mensaje-error error"></label>
+                            <label id="mensajeContrasenia" class="oculto mensaje-error error"></label>
                             <input type="text" disabled class="form-control" id="txtContrasenia">
                         </div>
                         <div class="form-group">
                             <label for="txtContraseniaRepetir">Repetir Contraseña</label>
-                            <label id="mensajeContraseniaRepetir" class="mensaje-error error"></label>
+                            <label id="mensajeContraseniaRepetir" class="oculto mensaje-error error"></label>
                             <input type="text" disabled class="form-control" id="txtContraseniaRepetir">
                         </div>
                         <button type="button" disabled class="btn btn-success" id="btnGuardar">Guardar Cambios</button>

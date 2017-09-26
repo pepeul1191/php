@@ -46,11 +46,25 @@ $('#txtCorreo').on('keyup', function(event) {
 
 	   		if(rpta['mensaje'][0] == 1){
 	   			$('#mensajeCorreo').html('Correo ingresado ya se encuentra en uso');
+	   			$('#mensajeCorreo').removeClass('oculto');
 	   		}else{
 	   			$('#mensajeCorreo').html('');
+	   			$('#mensajeCorreo').addClass('oculto');
 	   		}
 	   }
 	});
+});
+
+$('#txtCorreoRepetido').on('focusout', function(event) {;
+	var correo = $(txtCorreo).val();
+	var correo_repetido = $(txtCorreoRepetido).val();
+	if(correo != correo_repetido){
+		$('#mensajeCorreoRepetido').html('El correo ingresado no coincide con el primero');
+		$('#mensajeCorreoRepetido').removeClass('oculto');
+	}else{
+		$('#mensajeCorreoRepetido').html('');
+		$('#mensajeCorreoRepetido').addClass('oculto');
+	}
 });
 
 $('#txtUsuario').on('keyup', function(event) {
