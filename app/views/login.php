@@ -31,6 +31,7 @@
                     </div>
                     <div class="col-md-5">
                         <h4>Formulario de Registro</h4>
+                        <label id="mensajeFormulario" class="oculto mensaje-error-formulario error"></label>
                         <div class="form-group">
                             <label for="txtCorreo">Correo</label>
                             <label id="mensajeCorreo" oculto class="oculto mensaje-error error"></label>

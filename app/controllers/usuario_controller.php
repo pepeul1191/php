@@ -40,7 +40,26 @@ class UsuarioController extends Controller
 
     public static function guardar()
     {
+        $data = json_decode(Flight::request()->query['data']);
+        $usuario_nombre = $data->{'usuario'};
+        $correo = $data->{'correo'};
+        $contrasenia = $data->{'contrasenia'};
+        $rpta = null;
 
+        try {
+            $usuario = Model::factory('Usuario')->create();
+            $usuario->usuario = $usuario_nombre;
+            $usuario->correo = $correo;
+            $usuario->contrasenia = $contrasenia;
+            $usuario->save();
+            $rpta['tipo_mensaje'] = 'success';
+        } catch (Exception $e) {
+            #echo 'Excepción capturada: ',  $e->getMessage(), "\n";
+            $rpta['tipo_mensaje'] = 'error';
+            $rpta['mensaje'] = ['Se ha producido un error en registrar al usuario', $e->getMessage()];
+        }
+
+        echo json_encode($rpta);
     }
 
     public static function validar()
