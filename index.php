@@ -37,7 +37,9 @@ Flight::route('POST /provincia/crear', array('ProvinciaController','crear'));
 Flight::route('POST /provincia/editar', array('ProvinciaController','editar'));
 Flight::route('POST /provincia/eliminar', array('ProvinciaController','eliminar'));
 Flight::route('GET /distrito/listar/@provincia_id', array('DistritoController','listar'));
-
+Flight::route('POST /distrito/crear', array('DistritoController','crear'));
+Flight::route('POST /distrito/editar', array('DistritoController','editar'));
+Flight::route('POST /distrito/eliminar', array('DistritoController','eliminar'));
 
 
 /*

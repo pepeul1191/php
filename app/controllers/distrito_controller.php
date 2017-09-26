@@ -61,6 +61,72 @@ class DistritoController extends Controller
    {
 		echo json_encode(Model::factory('VWDistritoProvinciaDepartamento')->select('nombre')->where('id', $distrito_id)->find_one()->as_array());
    }
+
+   public static function crear()
+	{
+		$rpta = null;
+
+		try {
+			$provincia_id = Flight::request()->query['provincia_id'];
+			$nombre = Flight::request()->query['nombre'];
+			$distrito = Model::factory('Distrito')->create();
+
+			$distrito->nombre = $nombre;
+			$distrito->distrito = $distrito;
+			$distrito->save();
+			$id_generado = $distrito->id();
+			$rpta['tipo_mensaje'] = 'success';
+        	$rpta['mensaje'] = ['Se ha editado un distrito', $id_generado];
+		} catch (Exception $e) {
+		    #echo 'Excepción capturada: ',  $e->getMessage(), "\n";
+		    $rpta['tipo_mensaje'] = 'error';
+        	$rpta['mensaje'] = ['Se ha producido un error en crear el distrito', $e->getMessage()];
+		}
+
+		echo json_encode($rpta);
+	}   
+
+	public static function editar()
+	{
+		$rpta = null;
+
+		try {
+			$id = Flight::request()->query['id'];
+			$nombre = Flight::request()->query['nombre'];
+
+			$distrito = Model::factory('Distrito')->find_one($id);
+			$distrito->nombre = $nombre;
+			$distrito->save();
+			$rpta['tipo_mensaje'] = 'success';
+        	$rpta['mensaje'] = ['Se ha editado un distrito'];
+		} catch (Exception $e) {
+		    #echo 'Excepción capturada: ',  $e->getMessage(), "\n";
+		    $rpta['tipo_mensaje'] = 'error';
+        	$rpta['mensaje'] = ['Se ha producido un error en editar el distrito', $e->getMessage()];
+		}
+
+		echo json_encode($rpta);
+	}
+
+	public static function eliminar()
+	{
+		$rpta = null;
+
+		try {
+			$id = Flight::request()->query['id'];
+
+			$distrito = Model::factory('Distrito')->find_one($id);
+			$distrito->delete();
+			$rpta['tipo_mensaje'] = 'success';
+        	$rpta['mensaje'] = ['Se ha eliminado un distrito'];
+		} catch (Exception $e) {
+		    #echo 'Excepción capturada: ',  $e->getMessage(), "\n";
+		    $rpta['tipo_mensaje'] = 'error';
+        	$rpta['mensaje'] = ['Se ha producido un error en eliminar el distrito', $e->getMessage()];
+		}
+
+		echo json_encode($rpta);
+	}
 }
 
 ?>

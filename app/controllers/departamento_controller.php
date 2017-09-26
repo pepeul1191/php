@@ -23,7 +23,7 @@ class DepartamentoController extends Controller
 		} catch (Exception $e) {
 		    #echo 'Excepción capturada: ',  $e->getMessage(), "\n";
 		    $rpta['tipo_mensaje'] = 'error';
-        	$rpta['mensaje'] = ['Se ha producido un error en editar el departamento', $e->getMessage()];
+        	$rpta['mensaje'] = ['Se ha producido un error en crear el departamento', $e->getMessage()];
 		}
 
 		echo json_encode($rpta);

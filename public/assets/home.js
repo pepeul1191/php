@@ -42,10 +42,14 @@ $(document).on('click', '.fa', function(event) {
 			break;
 		//Inicio tabla provincia
 		case 'eliminarProvincia':
-
+			var provinciaId = $(event.currentTarget).parent().parent().children().eq(0).html();
+	    	var fila = $(event.currentTarget).parent().parent();
+	    	eliminarProvincia(provinciaId, fila);
 			break;
 		case 'editarProvincia':
-
+			var provinciaId = $(event.currentTarget).parent().parent().children().eq(0).html();
+	    	var provinciaNombre = $(event.currentTarget).parent().parent().children().eq(1).children().val();
+	    	editarProvincia(provinciaId, provinciaNombre);
 			break;
 		case 'cargarDistrito':
 	   		var distritoId = $(event.currentTarget).parent().parent().children().eq(0).html();
@@ -53,10 +57,14 @@ $(document).on('click', '.fa', function(event) {
 			break;
 		//Inicio tabla distrito
 		case 'eliminarDistrito':
-
+			var distritoId = $(event.currentTarget).parent().parent().children().eq(0).html();
+	    	var fila = $(event.currentTarget).parent().parent();
+	    	eliminarDistrito(distritoId, fila);
 			break;
 		case 'editarDistrito':
-
+			var distritoId = $(event.currentTarget).parent().parent().children().eq(0).html();
+	    	var distritoNombre = $(event.currentTarget).parent().parent().children().eq(1).children().val();
+	    	editarDistrito(distritoId, distritoNombre);
 			break;
 	    default:
 	       alert('Operacion ' + operacion + ' no implementada');
@@ -89,9 +97,6 @@ function eliminarDepartamento(departamentoId, fila){
 }
 
 function editarDepartamento(departamentoId, departamentoNombre){
-	$('#distritos').empty();
-	$('#provincias').empty();
-	
 	$.ajax({
 	   url: BASE_URL + 'departamento/editar?id=' + departamentoId + '&nombre=' + departamentoNombre, 
 	   type: "POST", 
@@ -137,6 +142,48 @@ function cargarProvincia(departamentoId){
 	});
 }
 
+function eliminarProvincia(provinciaId, fila){
+	$('#distritos').empty();
+	
+	$.ajax({
+	   url: BASE_URL + 'provincia/eliminar?id=' + provinciaId, 
+	   type: "POST", 
+	   async: false, 
+	   success: function(data) {
+	   		var rpta = JSON.parse(data);
+	   		$('#provinciasMensaje').html(rpta['mensaje']);
+	   		if(rpta['tipo_mensaje']=='error'){
+	   			$('#provinciasMensaje').removeClass('success');
+	   			$('#provinciasMensaje').addClass('error');
+	   		}else{
+	   			$('#provinciasMensaje').removeClass('error');
+	   			$('#provinciasMensaje').addClass('success');
+	   		}
+			fila.remove();   			   		
+	   }
+	});
+}
+
+function editarProvincia(provinciaId, provinciaNombre){	
+	$.ajax({
+	   url: BASE_URL + 'provincia/editar?id=' + provinciaId + '&nombre=' + provinciaNombre, 
+	   type: "POST", 
+	   async: false, 
+	   success: function(data) {
+	   		var rpta = JSON.parse(data);
+	   		$('#provinciasMensaje').html(rpta['mensaje']);
+	   		if(rpta['tipo_mensaje']=='error'){
+	   			$('#provinciasMensaje').removeClass('success');
+	   			$('#provinciasMensaje').addClass('error');
+	   		}else{
+	   			$('#provinciasMensaje').removeClass('error');
+	   			$('#provinciasMensaje').addClass('success');
+	   		}		   		
+	   }
+	});
+}
+
+
 /*++++++++++++++++++++++++ DISTRITOS ++++++++++++++++++++++++ */
 
 function cargarDistrito(provinciaId){
@@ -159,6 +206,45 @@ function cargarDistrito(provinciaId){
 			rpta = rpta + '<tfoot><tr><td  colspan="3"><button class="btn btn-primary" id="btnAgregarProvincia"><i class="fa fa-plus" aria-hidden="true"></i>Agregar Provincia</button></tr></td></tfoot>';
 	   		
 	   		$('#distritos').append(rpta);
+	   }
+	});
+}
+
+function eliminarDistrito(distritoId, fila){
+	$.ajax({
+	   url: BASE_URL + 'distrito/eliminar?id=' + distritoId, 
+	   type: "POST", 
+	   async: false, 
+	   success: function(data) {
+	   		var rpta = JSON.parse(data);
+	   		$('#distritosMensaje').html(rpta['mensaje']);
+	   		if(rpta['tipo_mensaje']=='error'){
+	   			$('#distritosMensaje').removeClass('success');
+	   			$('#distritosMensaje').addClass('error');
+	   		}else{
+	   			$('#distritosMensaje').removeClass('error');
+	   			$('#distritosMensaje').addClass('success');
+	   		}
+			fila.remove();   			   		
+	   }
+	});
+}
+
+function editarDistrito(distritoId, distritoNombre){	
+	$.ajax({
+	   url: BASE_URL + 'distrito/editar?id=' + distritoId + '&nombre=' + distritoNombre, 
+	   type: "POST", 
+	   async: false, 
+	   success: function(data) {
+	   		var rpta = JSON.parse(data);
+	   		$('#distritosMensaje').html(rpta['mensaje']);
+	   		if(rpta['tipo_mensaje']=='error'){
+	   			$('#distritosMensaje').removeClass('success');
+	   			$('#distritosMensaje').addClass('error');
+	   		}else{
+	   			$('#distritosMensaje').removeClass('error');
+	   			$('#distritosMensaje').addClass('success');
+	   		}		   		
 	   }
 	});
 }
