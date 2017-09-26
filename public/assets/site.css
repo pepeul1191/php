@@ -7,3 +7,5 @@ table > tbody > tr > td > i:hover{cursor: pointer;}
 td>input{ background: transparent;border: none;}
 td>i{margin-left: 10px}
 .btn>i{margin-right: 10px}
+.success{color: #3c763d;}
+.error{color: #a94442;}

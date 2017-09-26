@@ -31,10 +31,14 @@ $(document).on('click', '.fa', function(event) {
 	   		cargarProvincia(departamentoId);
 			break;
 	    case 'eliminarDepartamento':
-	    	
+	    	var departamentoId = $(event.currentTarget).parent().parent().children().eq(0).html();
+	    	var fila = $(event.currentTarget).parent().parent();
+	    	eliminarDepartamento(departamentoId, fila);
 			break;
 		case 'editarDepartamento':
-
+			var departamentoId = $(event.currentTarget).parent().parent().children().eq(0).html();
+	    	var departamentoNombre = $(event.currentTarget).parent().parent().children().eq(1).children().val();
+	    	editarDepartamento(departamentoId, departamentoNombre);
 			break;
 		//Inicio tabla provincia
 		case 'eliminarProvincia':
@@ -58,6 +62,55 @@ $(document).on('click', '.fa', function(event) {
 	       alert('Operacion ' + operacion + ' no implementada');
 		} 
 	});
+
+/*++++++++++++++++++++++++ DEPARTAMENTOS ++++++++++++++++++++++++ */
+
+function eliminarDepartamento(departamentoId, fila){
+	$('#distritos').empty();
+	$('#provincias').empty();
+	
+	$.ajax({
+	   url: BASE_URL + 'departamento/eliminar?id=' + departamentoId, 
+	   type: "POST", 
+	   async: false, 
+	   success: function(data) {
+	   		var rpta = JSON.parse(data);
+	   		$('#departamentosMensaje').html(rpta['mensaje']);
+	   		if(rpta['tipo_mensaje']=='error'){
+	   			$('#departamentosMensaje').removeClass('success');
+	   			$('#departamentosMensaje').addClass('error');
+	   		}else{
+	   			$('#departamentosMensaje').removeClass('error');
+	   			$('#departamentosMensaje').addClass('success');
+	   		}
+			fila.remove();   			   		
+	   }
+	});
+}
+
+function editarDepartamento(departamentoId, departamentoNombre){
+	$('#distritos').empty();
+	$('#provincias').empty();
+	
+	$.ajax({
+	   url: BASE_URL + 'departamento/editar?id=' + departamentoId + '&nombre=' + departamentoNombre, 
+	   type: "POST", 
+	   async: false, 
+	   success: function(data) {
+	   		var rpta = JSON.parse(data);
+	   		$('#departamentosMensaje').html(rpta['mensaje']);
+	   		if(rpta['tipo_mensaje']=='error'){
+	   			$('#departamentosMensaje').removeClass('success');
+	   			$('#departamentosMensaje').addClass('error');
+	   		}else{
+	   			$('#departamentosMensaje').removeClass('error');
+	   			$('#departamentosMensaje').addClass('success');
+	   		}		   		
+	   }
+	});
+}
+
+/*++++++++++++++++++++++++ PROVINCIAS ++++++++++++++++++++++++ */
 
 function cargarProvincia(departamentoId){
 	$('#distritos').empty();
@@ -83,6 +136,8 @@ function cargarProvincia(departamentoId){
 	   }
 	});
 }
+
+/*++++++++++++++++++++++++ DISTRITOS ++++++++++++++++++++++++ */
 
 function cargarDistrito(provinciaId){
 	$('#distritos').empty();

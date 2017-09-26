@@ -24,14 +24,19 @@
     <div class="container" style="margin-top: 45px;">
         <div class="col-md-4">
             <h3>Departamentos</h3>
+            <label id="departamentosMensaje"></label>
             <table id="departamentos" class="table table-striped"></table>
         </div>
         <div class="col-md-4">
-            <h3>Provincias</h3><label id="departamentoId"></label>
+            <h3>Provincias</h3>
+            <label id="provinciasMensaje"></label>
+            <label id="departamentoId"></label>
             <table id="provincias" class="table table-striped"></table>
         </div>
         <div class="col-md-4">
-            <h3>Distritos</h3><label id="provincaiId"></label>
+            <h3>Distritos</h3>
+            <label id="distritosMensaje"></label>
+            <label id="provincaiId"></label>
             <table id="distritos" class="table table-striped"></table>
         </div>
     </div>

@@ -2,55 +2,74 @@
 
 class DepartamentoController extends Controller
 {
-  public static function guardar()
-	{
-		$data = json_decode(Flight::request()->query['data']);
-		$nuevos = $data->{'nuevos'};
-		$editados = $data->{'editados'};
-		$eliminados = $data->{'eliminados'};
-		$rpta = []; $array_nuevos = [];
+	public static function listar()
+   {
+     	echo json_encode(Model::factory('Departamento')->find_array());
+   }
 
-    try {
-			if(count($nuevos) > 0){
-				foreach ($nuevos as &$nuevo) {
-				    $departamento = Model::factory('Departamento')->create();
-					 $departamento->nombre = $nuevo->{'nombre'};
-					 $departamento->save();
-					 $id_generado = $departamento->id();
-				    $temp = [];
-				    $temp['temporal'] = $nuevo->{'id'};
-	             $temp['nuevo_id'] = $id_generado;
-	             array_push( $array_nuevos, $temp );
-				}
-			}
-			if(count($editados) > 0){
-				foreach ($editados as &$editado) {
-					$departamento = Model::factory('Departamento')->find_one($editado->{'id'});
-					$departamento->nombre = $editado->{'nombre'};
-					$departamento->save();
-				}
-			}
-			if(count($eliminados) > 0){
-				foreach ($eliminados as &$eliminado) {
-			    	$departamento = Model::factory('Departamento')->find_one($eliminado);
-					$departamento->delete();
-				}
-			}
+	public static function crear()
+	{
+		$rpta = null;
+
+		try {
+			$nombre = Flight::request()->query['nombre'];
+			$departamento = Model::factory('Departamento')->create();
+
+			$departamento->nombre = $nombre;
+			$departamento->save();
+			$id_generado = $departamento->id();
 			$rpta['tipo_mensaje'] = 'success';
-        	$rpta['mensaje'] = ['Se ha registrado los cambios en los departamentos', $array_nuevos];
+        	$rpta['mensaje'] = ['Se ha editado un departamento', $id_generado];
 		} catch (Exception $e) {
 		    #echo 'Excepción capturada: ',  $e->getMessage(), "\n";
 		    $rpta['tipo_mensaje'] = 'error';
-        	$rpta['mensaje'] = ['Se ha producido un error en guardar la tabla de departamentos', $e->getMessage()];
+        	$rpta['mensaje'] = ['Se ha producido un error en editar el departamento', $e->getMessage()];
+		}
+
+		echo json_encode($rpta);
+	}   
+
+	public static function editar()
+	{
+		$rpta = null;
+
+		try {
+			$id = Flight::request()->query['id'];
+			$nombre = Flight::request()->query['nombre'];
+
+			$departamento = Model::factory('Departamento')->find_one($id);
+			$departamento->nombre = $nombre;
+			$departamento->save();
+			$rpta['tipo_mensaje'] = 'success';
+        	$rpta['mensaje'] = ['Se ha editado un departamento'];
+		} catch (Exception $e) {
+		    #echo 'Excepción capturada: ',  $e->getMessage(), "\n";
+		    $rpta['tipo_mensaje'] = 'error';
+        	$rpta['mensaje'] = ['Se ha producido un error en editar el departamento', $e->getMessage()];
 		}
 
 		echo json_encode($rpta);
 	}
 
-   public static function listar()
-   {
-     echo json_encode(Model::factory('Departamento')->find_array());
-   }
+	public static function eliminar()
+	{
+		$rpta = null;
+
+		try {
+			$id = Flight::request()->query['id'];
+
+			$departamento = Model::factory('Departamento')->find_one($id);
+			$departamento->delete();
+			$rpta['tipo_mensaje'] = 'success';
+        	$rpta['mensaje'] = ['Se ha eliminado un departamento'];
+		} catch (Exception $e) {
+		    #echo 'Excepción capturada: ',  $e->getMessage(), "\n";
+		    $rpta['tipo_mensaje'] = 'error';
+        	$rpta['mensaje'] = ['Se ha producido un error en eliminar el departamento', $e->getMessage()];
+		}
+
+		echo json_encode($rpta);
+	}
 }
 
 ?>
