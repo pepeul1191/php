@@ -91,6 +91,12 @@ $(document).on('click', '.fa', function(event) {
 	   		cargarDistrito(distritoId);
 			break;
 		//Inicio tabla distrito
+		case 'crearDistrito':
+			var distritoNombre = $(event.currentTarget).parent().parent().children().eq(1).children().val();
+	   		var fila = $(event.currentTarget).parent().parent();
+	   		var provinciaId = $('#provincaiId').html();
+	   		crearDistrito(distritoNombre, provinciaId, fila);
+			break;
 		case 'eliminarDistrito':
 			var distritoId = $(event.currentTarget).parent().parent().children().eq(0).html();
 	    	var fila = $(event.currentTarget).parent().parent();
@@ -275,6 +281,30 @@ function editarProvincia(provinciaId, provinciaNombre){
 
 
 /*++++++++++++++++++++++++ DISTRITOS ++++++++++++++++++++++++ */
+
+function crearDistrito(distritoNombre, provinciaId, fila){
+	$.ajax({
+	   url: BASE_URL + 'distrito/crear?provincia_id=' + provinciaId+ '&nombre=' + distritoNombre, 
+	   type: "POST", 
+	   async: false, 
+	   success: function(data) {
+	   		var rpta = JSON.parse(data);
+	   		
+	   		fila.children().eq(0).html(rpta['mensaje'][1]);
+	   		fila.children().eq(2).empty();
+	   		fila.children().eq(2).append('<i class="fa fa-pencil" aria-hidden="true" operacion="editarDistrito"></i><i class="fa fa-times" aria-hidden="true" operacion="eliminarDistrito"></i>');
+
+	   		$('#distritosMensaje').html(rpta['mensaje'][0]);
+	   		if(rpta['tipo_mensaje']=='error'){
+	   			$('#distritosMensaje').removeClass('success');
+	   			$('#distritosMensaje').addClass('error');
+	   		}else{
+	   			$('#distritosMensaje').removeClass('error');
+	   			$('#distritosMensaje').addClass('success');
+	   		}			   		
+	   }
+	});
+}
 
 function cargarDistrito(provinciaId){
 	$('#distritos').empty();
