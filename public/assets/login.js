@@ -174,15 +174,55 @@ $('#btnGuardar').on('click', function(event) {
 });
 
 function encriptar(dato){
+	//console.log(dato);
 	var rpta = null;
 	$.ajax({
-	   url: BASE_URL + 'cipher/encode?data=' + dato, 
+	   url: BASE_URL + 'cipher/encode?texto=' + dato, 
 	   type: "POST", 
 	   async: false, 
 	   success: function(data) {
+	   		//console.log(data);
 	   		rpta = data;
 	   }
 	});
 
 	return rpta;
 }
+
+$('#btnIngresar').on('click', function(event) {
+	var usuario = $(txtLoginUsuario).val();
+	var contrasenia = encriptar($(txtLoginContrasenia).val());
+
+	$.ajax({
+	   url: BASE_URL + 'usuario/validar?usuario=' + usuario + '&contrasenia=' + contrasenia, 
+	   type: "POST", 
+	   //data: 'data=' + JSON.stringify(usuario), 
+	   async: false, 
+	   success: function(data) {
+	   		var rpta = JSON.parse(data);
+
+	   		if(rpta['tipo_mensaje']=='error'){
+	   			$('#mensajeLogin').removeClass('success');
+	   			$('#mensajeLogin').removeClass('oculto');
+	   			$('#mensajeLogin').html('Ha ocurrido un error en guardar el formulario');
+	   			$('#mensajeLogin').addClass('error');
+	   		}else{
+	   			if(rpta['mensaje'][0] == 0){
+	   				$('#mensajeLogin').removeClass('success');
+		   			$('#mensajeLogin').removeClass('oculto');
+		   			$('#mensajeLogin').html('Usuario y/o contraseña no coinciden');
+		   			$('#mensajeLogin').addClass('error');
+	   			}else{
+		   			$('#mensajeLogin').removeClass('oculto');
+		   			$('#mensajeLogin').html('Login OK');
+		   			$('#mensajeLogin').removeClass('error');
+		   			$('#mensajeLogin').addClass('success');
+		   			console.log(BASE_URL + 'home');
+	   			}
+	   		}	
+	   }
+	});
+	console.log(1);
+	window.location.assign(BASE_URL + 'home');
+	console.log(2);
+});

@@ -68,9 +68,10 @@
     <div class="login-page">
         <div class="form">
             <form class="login-form">
-                <input type="text" placeholder="usuario"/>
-                <input type="password" placeholder="contrasenia"/>
-                <button>Ingresar</button>
+                <input type="text" placeholder="usuario" id="txtLoginUsuario"/>
+                <input type="password" placeholder="contrasenia" id="txtLoginContrasenia"/>
+                <label id="mensajeLogin" class="oculto mensaje-error-formulario error"></label>
+                <button id="btnIngresar">Ingresar</button>
                 <p class="message">No está registrado? <a href="#" id="linkModal">Crear usuario</a></p>
             </form>
         </div>

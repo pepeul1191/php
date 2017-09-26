@@ -4,7 +4,8 @@ class CipherController
 {
     public static function encode()
     {
-        $key = Flight::request()->query['key'];
+        //$key = Flight::request()->query['key'];
+        $key = KEY;
         $texto = Flight::request()->query['texto'];
         $securekey = hash('sha256',$key,TRUE);
         $iv = mcrypt_create_iv(16);
