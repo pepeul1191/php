@@ -43,11 +43,30 @@ $('#txtCorreo').on('keyup', function(event) {
 	   async: false, 
 	   success: function(data) {
 	   		var rpta = JSON.parse(data);
-	   		console.log(rpta['mensaje'][0]);
+
 	   		if(rpta['mensaje'][0] == 1){
 	   			$('#mensajeCorreo').html('Correo ingresado ya se encuentra en uso');
 	   		}else{
 	   			$('#mensajeCorreo').html('');
+	   		}
+	   }
+	});
+});
+
+$('#txtUsuario').on('keyup', function(event) {
+	var usuario = $(event.currentTarget).val();
+	
+	$.ajax({
+	   url: BASE_URL + 'usuario/usuario_repetido?usuario=' + usuario, 
+	   type: "POST", 
+	   async: false, 
+	   success: function(data) {
+	   		var rpta = JSON.parse(data);
+
+	   		if(rpta['mensaje'][0] == 1){
+	   			$('#mensajeUsuario').html('Usuario ingresado ya se encuentra en uso');
+	   		}else{
+	   			$('#mensajeUsuario').html('');
 	   		}
 	   }
 	});
