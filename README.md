@@ -22,131 +22,26 @@
 
 Servicio web desarrollado en PHP usando el framework FlightPHP, con patrones de diseño front-controller y distpacher y la interfaz de Idiorm para interactuar con la base de datos.
 
-### Rutas
+### SERVICIOS
 
-+ get 'usuario/listar', to: 'usuario#listar'
-+ get 'usuario/listar_permisos/:usuario_id', 'usuario/listar_permisos'
-+ post 'usuario/validar', to: 'usuario#validar'
++ (1) POST : validar/correo_repetido
++ (2) POST : validar/usuario_repetido
++ (3) POST : cipher/encode
++ (4) POST : usuario/guardar
++ (5) POST : usuario/validar
 
-### Rutas - Descripción
+### PREGUNTAS
 
-#### [URL] + usuario/listar
+1) Si "Acepto los Términos y Condiciones" está checkado, los campos y el botón del Formulario de Registro deberá estar habilitado, caso contrario estarán desabilitados.
+2) Cada vez que precione una tecla al escribir el Correo, se deberá llamar al servicio (1), el cuál validará que el correo no se encuentre en uso. En caso que el servicio web diga que el correo ya se encuentra en uso, se deberá mostrar un mensaje en el formulario diciendo que el correo ingresado ya se encuentra en uso. Una vez corregido el error, el mensaje deberá borrarse. 
+3) Cuando se escriba el Correo Repetir y se salga de ese input[text], se deberá validar que el correo repetido coincida con el Correo. En caso que no coincidan deberá ser mostrado un mensaje en el formulario diciendo que el segundo correo no coincide con el primero. Una vez corregido el error, el mensaje deberá borrarse.
+4) Cuando se salga del input[text] de Correo y Correo Repetir, se deberá validar que el texto ingresado sea un correo electrónico válido. En caso que no sean un correo electrónico válido deberá ser mostrado un mensaje en el formulario diciendo que el error ocurrido. Una vez corregido el error, el mensaje deberá borrarse.
+5) Cada vez que precione una tecla al escribir el Usuario, se deberá llamar al servicio (2), el cuál validará que el usuario no se encuentre en uso. En caso que el servicio web diga que el usuario ya se encuentra en uso, se deberá mostrar un mensaje en el formulario diciendo que el usuario ingresado ya se encuentra en uso.
+6) Cuando se salga del input[text] de Repetir Contraseña, se deberá validar que el texto ingresado coincida con Contraseña. En caso que no coincidan, deberá ser mostrado un mensaje en el formulario diciendo que el error ocurrido. Una vez corregido el error, el mensaje deberá borrarse.
+7) Si al apretar el botón Guardar Cambios no se han solucionado los errores de validación de los campos del formulario, no se deberá mandar los datos del formulario al servidor.
+8) En caso que los campos del formulario pasen sus respectivas validaciones, antes de ser enviado dichos campos al servidor, la contraseña deberá ser encriptada usando el servicio (3). Una vez que se encripte la contraseña usando dicho servicio, se deberá mandar los campos del formulario al servicio(4), el cuál se encargará de guardar los datos de usuario y devolver un mensaje. Dicho mensaje deberá ser mostrado en el formulario.
+9) Una vez registrado el usuario, se deberá ingresar al formulario de login, y al usuario el usuario y contraseña recién creados, se deberá validar dicho usuario y contraseña contra el servicio (5). Si la validación es satisfactoria, se deberá redireccionar a una vista del requerimiento (10), en caso contrario, se deberá mostrar un mensaje indicando que el "Usuario y/o contraseña no coinciden".
 
-<b>Objetivo(s)</b>
-
-Devolver un listado de todos los datos de los usuarios.
-
-<b>Método HTTP</b>
-
-+ GET
-
-<b>Parámetros</b>
-
-+ Argumentos en la url : ninguno
-+ Query Params : ninguno 
-
-<b>Formato de respuesta OK</b>
-
-JSON string de la lista de usuarios.
-
-> {"id":1,"usuario":"pepe","contrasenia":"ujaGz6w7QkJOKec1YkSkNgu4RGJIHYxkjpdpHx/YU/w=","correo":"jvaldivia@softweb.pe","estado_usuario_id":1}{"id":2,"usuario":"yacky","contrasenia":"ujaGz6w7QkJOKec1YkSkNiB4CQM2YMjqrX5tyjAyXaY=","correo":"yramirez@disenoreal.com","estado_usuario_id":1}{"id":3,"usuario":"rails","contrasenia":"Z66FgGws3EKbDFPViiEnSA==","correo":"jvaldivia@softweb.pe","estado_usuario_id":1}{"id":4,"usuario":"fuel","contrasenia":"QJOPfBjSrktR5f4aZKOaGpdZs8fnwzYAoT3F2dOrIks=","correo":"jvaldivia@softweb.pe","estado_usuario_id":1}
-
-<b>Formato de respuesta alternativo </b>
-
-+ Los generados por las excepciones controladas con el siguiente formato:
-
-> {"tipo_mensaje":"error","rpta_mensaje":"mensaje personalizado","error":"Error en string de la excepción"}
-
----
-
-#### [URL] + usuario/validar
-
-<b>Objetivo(s)</b>
-
-Validar si el usuario y contraseña ingresada conincide con la base de datos.
-
-<b>Método HTTP</b>
-
-+ POST
-
-<b>Parámetros</b>
-
-+ Argumentos en la url : ninguno
-+ Query Params : usuario, contrasenia
-
-<b>Formato de respuesta OK</b>
-
-Devuelve '1' si el usuario y contraseña existen y coinciden con un registro de la base de datos, '0' si no existe coincidencia
-
-> 1
-
-<b>Formato de respuesta alternativo </b>
-
-+ Los generados por las excepciones controladas con el siguiente formato:
-
-> {"tipo_mensaje":"error","rpta_mensaje":"mensaje personalizado","error":"Error en string de la excepción"}
-
-+ Si no existe o no hay coincidencia con el usuario y contraseña:
-
-> 0
-
----
-
-#### [URL] + usuario/listar_usuarios
-
-<b>Objetivo(s)</b>
-
-Devolver un listado sólo el campo usuario de los usuarios.
-
-<b>Método HTTP</b>
-
-+ GET
-
-<b>Parámetros</b>
-
-+ Argumentos en la url : ninguno
-+ Query Params : ninguno
-
-<b>Formato de respuesta OK</b>
-
-Devuelve un arraglo de JSONs en string, cada JSON tendrá sólo la llave usuario y su respectivo valor.
-
-> [{"usuario":"pepe"},{"usuario":"yacky"},{"usuario":"rails"},{"usuario":"fuel"}]
-
-<b>Formato de respuesta alternativo </b>
-
-+ Los generados por las excepciones controladas con el siguiente formato:
-
-> {"tipo_mensaje":"error","rpta_mensaje":"mensaje personalizado","error":"Error en string de la excepción"}
-
----
-
-#### [URL] + usuario/listar_permisos/:usuario_id
-
-<b>Objetivo(s)</b>
-
-Devolver un listado de los permisos de un usuario.
-
-<b>Método HTTP</b>
-
-+ GET
-
-<b>Parámetros</b>
-
-+ Argumentos en la url : usuario_id
-+ Query Params : ninguno
-
-<b>Formato de respuesta OK</b>
-
-Devuelve un arraglo de JSONs en string, cada JSON mostrando el id, nombre del permiso y su respectivo valor.
-
-> [{"id":1,"nombre":"Crear usuario","existe":0,"llave":"crear_usuario"},{"id":3,"nombre":"Editar usuario","existe":0,"llave":"editar_usuario"},{"id":4,"nombre":"Ver usuario","existe":0,"llave":"ver_usuario"}]
-
-<b>Formato de respuesta alternativo </b>
-
-+ Los generados por las excepciones controladas con el siguiente formato:
-
-> {"tipo_mensaje":"error","rpta_mensaje":"mensaje personalizado","error":"Error en string de la excepción"}
 
 --- 
 

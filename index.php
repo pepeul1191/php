@@ -34,6 +34,7 @@ Flight::route('POST /encode', array('CipherController','encode'));
 Flight::route('POST /decode', array('CipherController','decode'));
 
 Flight::route('GET /login', array('ParcialController','login'));
+Flight::route('GET /home', array('ParcialController','home'));
 /*
 Flight::map('notFound', function(){
 	header('HTTP/1.0 404 Not Found');

@@ -6,6 +6,11 @@ class ParcialController extends Controller
     {
         Flight::render('login.php', array('name' => 'Bob'));    
     }
+
+    public static function home()
+    {
+    		Flight::render('home.php');    	
+    }
 }
 
 ?>
