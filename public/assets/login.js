@@ -1,15 +1,17 @@
+const BASE_URL = 'http://localhost/parcial/';
+
 $( "#linkModal" ).on( "click", function() {
     $('#btnModal').click();
 });
 
 $(document).ready(function() {
-	var chkTerminosCondiciones = $('#chkTerminosCondiciones')
-	var txtCorreo = $('#txtCorreo')
-	var txtCorreoRepetido = $('#txtCorreoRepetido')
-	var txtUsuario = $('#txtUsuario')
-	var txtContrasenia = $('#txtContrasenia')
-	var txtContraseniaRepetir = $('#txtContraseniaRepetir')
-	var btnGuardar = $('#btnGuardar')
+	var chkTerminosCondiciones = $('#chkTerminosCondiciones');
+	var txtCorreo = $('#txtCorreo');
+	var txtCorreoRepetido = $('#txtCorreoRepetido');
+	var txtUsuario = $('#txtUsuario');
+	var txtContrasenia = $('#txtContrasenia');
+	var txtContraseniaRepetir = $('#txtContraseniaRepetir');
+	var btnGuardar = $('#btnGuardar');
 
 	$('#chkTerminosCondiciones').change(function() {
        if($(this).is(":checked")) {
@@ -33,5 +35,20 @@ $(document).ready(function() {
 });
 
 $('#txtCorreo').on('keyup', function(event) {
-
+	var correo = $(event.currentTarget).val();
+	
+	$.ajax({
+	   url: BASE_URL + 'usuario/correo_repetido?correo=' + correo, 
+	   type: "POST", 
+	   async: false, 
+	   success: function(data) {
+	   		var rpta = JSON.parse(data);
+	   		console.log(rpta['mensaje'][0]);
+	   		if(rpta['mensaje'][0] == 1){
+	   			$('#mensajeCorreo').html('Correo ingresado ya se encuentra en uso');
+	   		}else{
+	   			$('#mensajeCorreo').html('');
+	   		}
+	   }
+	});
 });
