@@ -12,8 +12,9 @@ class ProvinciaController extends Controller
 		$rpta = null;
 
 		try {
-			$departamento_id = Flight::request()->query['departamento_id'];
-			$nombre = Flight::request()->query['nombre'];
+			$data = json_decode(Flight::request()->data['data']);
+			$departamento_id = $data->{'departamento_id'};
+			$nombre = $data->{'nombre'};
 			$provincia = Model::factory('Provincia')->create();
 
 			$provincia->nombre = $nombre;
@@ -36,8 +37,9 @@ class ProvinciaController extends Controller
 		$rpta = null;
 
 		try {
-			$id = Flight::request()->query['id'];
-			$nombre = Flight::request()->query['nombre'];
+			$data = json_decode(Flight::request()->data['data']);
+			$id = $data->{'id'};
+			$nombre = $data->{'nombre'};
 
 			$provincia = Model::factory('Provincia')->find_one($id);
 			$provincia->nombre = $nombre;

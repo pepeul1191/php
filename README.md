@@ -60,7 +60,7 @@ Servicio web desarrollado en PHP usando el framework FlightPHP, con patrones de 
 14) Este requerimiento depende de la lista de distritos de cada provincia generada con el primer botón de la fila de provincias del requerimiento (12). Esta lista de distritos usando el servicio (14) deberá ser editable y con dos botones, uno  para que cada vez editado el campo al apretar permitirá grabar los cambios de dicho distrito usando el servicio (16), y por último, al apretar el segundo botón de la fila, se deberá usar el servicio (17) para eliminarlos de base de datos y además se deberá eliminar el DOM dicho registro. Para confirmar que las operaciones de edición y eliminación han sido realizadas con éxito, se deberá mostrar un mensaje en la pantalla.
 15) Al final de la tabla de distritos deberá haber un botón que permita agrear una fila, la cuál una vez grabada tendra las mismas dos operaciones de cada fila del requerimiento (14). El servicio a usar para crear una nuevo distrito es (15). Cabe resaltar que dicho departamento creado deberá tener relacionado la provincia al que pertenece.
 
-
+http://ulima-parcial.000webhostapp.com/ -> 7GEv)8M!J$b5^SJRgjZe
 --- 
 
 #### Fuentes

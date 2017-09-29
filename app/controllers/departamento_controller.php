@@ -34,8 +34,9 @@ class DepartamentoController extends Controller
 		$rpta = null;
 
 		try {
-			$id = Flight::request()->query['id'];
-			$nombre = Flight::request()->query['nombre'];
+			$data = json_decode(Flight::request()->data['data']);
+			$id = $data->{'id'};
+			$nombre = $data->{'nombre'};
 
 			$departamento = Model::factory('Departamento')->find_one($id);
 			$departamento->nombre = $nombre;

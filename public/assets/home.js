@@ -167,10 +167,14 @@ function crearDepartamento(departamentoNombre, fila){
 }
 
 function editarDepartamento(departamentoId, departamentoNombre){
+	var departamento = new Object();
+	departamento.id = departamentoId;
+	departamento.nombre = departamentoNombre;
 	$.ajax({
-	   url: BASE_URL + 'departamento/editar?id=' + departamentoId + '&nombre=' + departamentoNombre, 
+	   url: BASE_URL + 'departamento/editar', 
 	   type: "POST", 
 	   async: false, 
+	   data : 'data=' + JSON.stringify(departamento), 
 	   success: function(data) {
 	   		var rpta = JSON.parse(data);
 	   		$('#departamentosMensaje').html(rpta['mensaje']);
@@ -215,10 +219,15 @@ function cargarProvincia(departamentoId){
 }
 
 function crearProvincia(provinciaNombre, departamentoId, fila){
+	var provincia = new Object();
+	provincia.departamento_id = departamentoId;
+	provincia.nombre = provinciaNombre;
+
 	$.ajax({
-	   url: BASE_URL + 'provincia/crear?departamento_id=' + departamentoId+ '&nombre=' + provinciaNombre, 
+	   url: BASE_URL + 'provincia/crear', 
 	   type: "POST", 
 	   async: false, 
+	   data : 'data=' + JSON.stringify(provincia), 
 	   success: function(data) {
 	   		var rpta = JSON.parse(data);
 	   		
@@ -261,10 +270,15 @@ function eliminarProvincia(provinciaId, fila){
 }
 
 function editarProvincia(provinciaId, provinciaNombre){	
+	var provincia = new Object();
+	provincia.id = provinciaId;
+	provincia.nombre = provinciaNombre;
+
 	$.ajax({
-	   url: BASE_URL + 'provincia/editar?id=' + provinciaId + '&nombre=' + provinciaNombre, 
+	   url: BASE_URL + 'provincia/editar', 
 	   type: "POST", 
 	   async: false, 
+	   data : 'data=' + JSON.stringify(provincia), 
 	   success: function(data) {
 	   		var rpta = JSON.parse(data);
 	   		$('#provinciasMensaje').html(rpta['mensaje']);
@@ -283,10 +297,15 @@ function editarProvincia(provinciaId, provinciaNombre){
 /*++++++++++++++++++++++++ DISTRITOS ++++++++++++++++++++++++ */
 
 function crearDistrito(distritoNombre, provinciaId, fila){
+	var distrito = new Object();
+	distrito.provincia_id = provinciaId;
+	distrito.nombre = distritoNombre;
+
 	$.ajax({
-	   url: BASE_URL + 'distrito/crear?provincia_id=' + provinciaId+ '&nombre=' + distritoNombre, 
+	   url: BASE_URL + 'distrito/crear', 
 	   type: "POST", 
 	   async: false, 
+	   data : 'data=' + JSON.stringify(distrito), 
 	   success: function(data) {
 	   		var rpta = JSON.parse(data);
 	   		
@@ -353,9 +372,14 @@ function eliminarDistrito(distritoId, fila){
 }
 
 function editarDistrito(distritoId, distritoNombre){	
+	var distrito = new Object();
+	distrito.id = distritoId;
+	distrito.nombre = distritoNombre;
+
 	$.ajax({
-	   url: BASE_URL + 'distrito/editar?id=' + distritoId + '&nombre=' + distritoNombre, 
+	   url: BASE_URL + 'distrito/editar', 
 	   type: "POST", 
+	   data : 'data=' + JSON.stringify(distrito),
 	   async: false, 
 	   success: function(data) {
 	   		var rpta = JSON.parse(data);
