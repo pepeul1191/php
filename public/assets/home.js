@@ -122,13 +122,18 @@ $(document).on('click', '.fa', function(event) {
 function eliminarDepartamento(departamentoId, fila){
 	$('#distritos').empty();
 	$('#provincias').empty();
+
+	var departamento = { id: departamentoId };
 	
 	$.ajax({
-	   url: BASE_URL + 'departamento/eliminar?id=' + departamentoId, 
+	   url: BASE_URL + 'departamento/eliminar', 
 	   type: "POST", 
 	   async: false, 
+	   contentType: 'application/json; charset=utf-8',
+    	dataType: 'json',
+	   data : JSON.stringify(departamento), 
 	   success: function(data) {
-	   		var rpta = JSON.parse(data);
+	   		var rpta = data;
 	   		$('#departamentosMensaje').html(rpta['mensaje']);
 	   		if(rpta['tipo_mensaje']=='error'){
 	   			$('#departamentosMensaje').removeClass('success');
@@ -143,12 +148,17 @@ function eliminarDepartamento(departamentoId, fila){
 }
 
 function crearDepartamento(departamentoNombre, fila){
+	var departamento = { nombre: departamentoNombre };
+
 	$.ajax({
-	   url: BASE_URL + 'departamento/crear?nombre=' + departamentoNombre, 
+	   url: BASE_URL + 'departamento/crear', 
 	   type: "POST", 
 	   async: false, 
+	   contentType: 'application/json; charset=utf-8',
+    	dataType: 'json',
+	   data : JSON.stringify(departamento), 
 	   success: function(data) {
-	   		var rpta = JSON.parse(data);
+	   		var rpta = data;
 	   		
 	   		fila.children().eq(0).html(rpta['mensaje'][1]);
 	   		fila.children().eq(2).empty();
@@ -174,9 +184,11 @@ function editarDepartamento(departamentoId, departamentoNombre){
 	   url: BASE_URL + 'departamento/editar', 
 	   type: "POST", 
 	   async: false, 
-	   data : 'data=' + JSON.stringify(departamento), 
+	   contentType: 'application/json; charset=utf-8',
+    	dataType: 'json',
+	   data : JSON.stringify(departamento), 
 	   success: function(data) {
-	   		var rpta = JSON.parse(data);
+	   		var rpta = data;
 	   		$('#departamentosMensaje').html(rpta['mensaje']);
 	   		if(rpta['tipo_mensaje']=='error'){
 	   			$('#departamentosMensaje').removeClass('success');
@@ -227,9 +239,11 @@ function crearProvincia(provinciaNombre, departamentoId, fila){
 	   url: BASE_URL + 'provincia/crear', 
 	   type: "POST", 
 	   async: false, 
-	   data : 'data=' + JSON.stringify(provincia), 
+	   contentType: 'application/json; charset=utf-8',
+    	dataType: 'json',
+	   data : JSON.stringify(provincia), 
 	   success: function(data) {
-	   		var rpta = JSON.parse(data);
+	   		var rpta = data;
 	   		
 	   		fila.children().eq(0).html(rpta['mensaje'][1]);
 	   		fila.children().eq(2).empty();
@@ -249,13 +263,18 @@ function crearProvincia(provinciaNombre, departamentoId, fila){
 
 function eliminarProvincia(provinciaId, fila){
 	$('#distritos').empty();
+	var provincia = new Object();
+	provincia.id = provinciaId;
 	
 	$.ajax({
-	   url: BASE_URL + 'provincia/eliminar?id=' + provinciaId, 
+	   url: BASE_URL + 'provincia/eliminar', 
 	   type: "POST", 
 	   async: false, 
+	   contentType: 'application/json; charset=utf-8',
+    	dataType: 'json',
+	   data : JSON.stringify(provincia), 
 	   success: function(data) {
-	   		var rpta = JSON.parse(data);
+	   		var rpta = data;
 	   		$('#provinciasMensaje').html(rpta['mensaje']);
 	   		if(rpta['tipo_mensaje']=='error'){
 	   			$('#provinciasMensaje').removeClass('success');
@@ -278,9 +297,11 @@ function editarProvincia(provinciaId, provinciaNombre){
 	   url: BASE_URL + 'provincia/editar', 
 	   type: "POST", 
 	   async: false, 
-	   data : 'data=' + JSON.stringify(provincia), 
+	   contentType: 'application/json; charset=utf-8',
+    	dataType: 'json',
+	   data : JSON.stringify(provincia), 
 	   success: function(data) {
-	   		var rpta = JSON.parse(data);
+	   		var rpta = data;
 	   		$('#provinciasMensaje').html(rpta['mensaje']);
 	   		if(rpta['tipo_mensaje']=='error'){
 	   			$('#provinciasMensaje').removeClass('success');
@@ -305,9 +326,11 @@ function crearDistrito(distritoNombre, provinciaId, fila){
 	   url: BASE_URL + 'distrito/crear', 
 	   type: "POST", 
 	   async: false, 
-	   data : 'data=' + JSON.stringify(distrito), 
+	   contentType: 'application/json; charset=utf-8',
+    	dataType: 'json',
+	   data : JSON.stringify(distrito), 
 	   success: function(data) {
-	   		var rpta = JSON.parse(data);
+	   		var rpta = data;
 	   		
 	   		fila.children().eq(0).html(rpta['mensaje'][1]);
 	   		fila.children().eq(2).empty();
@@ -352,12 +375,18 @@ function cargarDistrito(provinciaId){
 }
 
 function eliminarDistrito(distritoId, fila){
+	var distrito = new Object();
+	distrito.id = distritoId;
+
 	$.ajax({
-	   url: BASE_URL + 'distrito/eliminar?id=' + distritoId, 
+	   url: BASE_URL + 'distrito/eliminar', 
 	   type: "POST", 
 	   async: false, 
+	   contentType: 'application/json; charset=utf-8',
+    	dataType: 'json',
+    	  data : JSON.stringify(distrito), 
 	   success: function(data) {
-	   		var rpta = JSON.parse(data);
+	   		var rpta = data;
 	   		$('#distritosMensaje').html(rpta['mensaje']);
 	   		if(rpta['tipo_mensaje']=='error'){
 	   			$('#distritosMensaje').removeClass('success');
@@ -379,10 +408,12 @@ function editarDistrito(distritoId, distritoNombre){
 	$.ajax({
 	   url: BASE_URL + 'distrito/editar', 
 	   type: "POST", 
-	   data : 'data=' + JSON.stringify(distrito),
+	   contentType: 'application/json; charset=utf-8',
+    	dataType: 'json',
+    	  data : JSON.stringify(distrito), 
 	   async: false, 
 	   success: function(data) {
-	   		var rpta = JSON.parse(data);
+	   		var rpta = data;
 	   		$('#distritosMensaje').html(rpta['mensaje']);
 	   		if(rpta['tipo_mensaje']=='error'){
 	   			$('#distritosMensaje').removeClass('success');

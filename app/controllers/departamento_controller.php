@@ -12,7 +12,7 @@ class DepartamentoController extends Controller
 		$rpta = null;
 
 		try {
-			$nombre = Flight::request()->query['nombre'];
+			$nombre = Flight::request()->data['nombre'];
 			$departamento = Model::factory('Departamento')->create();
 
 			$departamento->nombre = $nombre;
@@ -35,8 +35,8 @@ class DepartamentoController extends Controller
 
 		try {
 			$data = json_decode(Flight::request()->data['data']);
-			$id = $data->{'id'};
-			$nombre = $data->{'nombre'};
+			$id = Flight::request()->data['id'];
+			$nombre = Flight::request()->data['nombre'];
 
 			$departamento = Model::factory('Departamento')->find_one($id);
 			$departamento->nombre = $nombre;

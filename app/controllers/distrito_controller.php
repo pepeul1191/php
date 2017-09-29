@@ -22,9 +22,8 @@ class DistritoController extends Controller
 		$rpta = null;
 
 		try {
-			$data = json_decode(Flight::request()->data['data']);
-			$provincia_id = $data->{'provincia_id'};
-			$nombre = $data->{'nombre'};
+			$provincia_id = Flight::request()->data['provincia_id'];
+			$nombre = Flight::request()->data['nombre'];
 			$distrito = Model::factory('Distrito')->create();
 
 			$distrito->nombre = $nombre;
@@ -47,9 +46,8 @@ class DistritoController extends Controller
 		$rpta = null;
 
 		try {
-			$data = json_decode(Flight::request()->data['data']);
-			$id = $data->{'id'};
-			$nombre = $data->{'nombre'};
+			$id = Flight::request()->data['id'];
+			$nombre = Flight::request()->data['nombre'];
 
 			$distrito = Model::factory('Distrito')->find_one($id);
 			$distrito->nombre = $nombre;
@@ -70,7 +68,7 @@ class DistritoController extends Controller
 		$rpta = null;
 
 		try {
-			$id = Flight::request()->query['id'];
+			$id = Flight::request()->data['id'];
 
 			$distrito = Model::factory('Distrito')->find_one($id);
 			$distrito->delete();
