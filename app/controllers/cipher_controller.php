@@ -6,11 +6,15 @@ class CipherController
     {
         //$key = Flight::request()->query['key'];
         $key = KEY;
-        $texto = Flight::request()->query['texto'];
+        $texto = Flight::request()->data['texto'];
         $securekey = hash('sha256',$key,TRUE);
         $iv = mcrypt_create_iv(16);
 
-        echo base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_256, $securekey, $texto, MCRYPT_MODE_ECB, $iv));
+        $encode = base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_256, $securekey, $texto, MCRYPT_MODE_ECB, $iv));
+
+        $rpta['tipo_mensaje'] = 'success';
+        $rpta['mensaje'] = [$encode];
+        echo json_encode($rpta);
     }
     
     public static function decode()

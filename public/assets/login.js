@@ -37,16 +37,17 @@ $(document).ready(function() {
 });
 
 $('#txtCorreo').on('keyup', function(event) {
-	var correo = $(event.currentTarget).val();
-	
+	var correo_texto = $(event.currentTarget).val();
+	var correo = { correo: correo_texto };
 	$.ajax({
-	   url: BASE_URL + 'usuario/correo_repetido?correo=' + correo, 
+	   url: BASE_URL + 'usuario/correo_repetido', 
 	   type: "POST", 
 	   async: false, 
+	   contentType: 'application/json; charset=utf-8',
+    	dataType: 'json',
+	   data : JSON.stringify(correo), 
 	   success: function(data) {
-	   		var rpta = JSON.parse(data);
-
-	   		if(rpta['mensaje'][0] == 1){
+	   		if(data['mensaje'][0] == 1){
 	   			$('#mensajeCorreo').html('Correo ingresado ya se encuentra en uso');
 	   			$('#mensajeCorreo').removeClass('oculto');
 	   			formularioValido = false;
@@ -99,15 +100,17 @@ $('#txtCorreoRepetido').on('focusout', function(event) {;
 });
 
 $('#txtUsuario').on('keyup', function(event) {
-	var usuario = $(event.currentTarget).val();
+	var usuario_texto = $(event.currentTarget).val();
+	var usuario = { usuario: usuario_texto };
 	
 	$.ajax({
-	   url: BASE_URL + 'usuario/usuario_repetido?usuario=' + usuario, 
+	   url: BASE_URL + 'usuario/usuario_repetido', 
 	   type: "POST", 
 	   async: false, 
-	   success: function(data) {
-	   		var rpta = JSON.parse(data);
-
+	   contentType: 'application/json; charset=utf-8',
+    	dataType: 'json',
+	   data : JSON.stringify(usuario), 
+	   success: function(rpta) {
 	   		if(rpta['mensaje'][0] == 1){
 	   			$('#mensajeUsuario').html('Usuario ingresado ya se encuentra en uso');
 	   			$('#mensajeUsuario').removeClass('oculto');
@@ -150,12 +153,15 @@ $('#btnGuardar').on('click', function(event) {
 		usuario.contrasenia = encriptar($(txtContrasenia).val());
 
 		$.ajax({
-		   url: BASE_URL + 'usuario/guardar?data=' + JSON.stringify(usuario), 
+		   url: BASE_URL + 'usuario/guardar', 
 		   type: "POST", 
 		   //data: 'data=' + JSON.stringify(usuario), 
 		   async: false, 
+		   contentType: 'application/json; charset=utf-8',
+	    	dataType: 'json',
+		   data : JSON.stringify(usuario), 
 		   success: function(data) {
-		   		var rpta = JSON.parse(data);
+		   		var rpta = data;
 
 		   		if(rpta['tipo_mensaje']=='error'){
 		   			$('#mensajeFormulario').removeClass('success');
@@ -174,33 +180,40 @@ $('#btnGuardar').on('click', function(event) {
 });
 
 function encriptar(dato){
-	//console.log(dato);
+	console.log(dato);
 	var rpta = null;
+	var data = new Object();
+	data.texto = dato;
+
 	$.ajax({
-	   url: BASE_URL + 'cipher/encode?texto=' + dato, 
-	   type: "POST", 
-	   async: false, 
-	   success: function(data) {
-	   		//console.log(data);
-	   		rpta = data;
+	    url: BASE_URL + 'cipher/encode', 
+	    type: "POST", 
+	    async: false, 
+	    contentType: 'application/json; charset=utf-8',
+	    dataType: 'json',
+		data : JSON.stringify(data), 
+	    success: function(data_encode) {
+	   		rpta = data_encode['mensaje'][0];
 	   }
 	});
-
+	
 	return rpta;
 }
 
 $('#btnIngresar').on('click', function(event) {
-	var usuario = $(txtLoginUsuario).val();
-	var contrasenia = encriptar($(txtLoginContrasenia).val());
+	var usuario = new Object();
+	usuario.usuario = $(txtLoginUsuario).val();
+	usuario.contrasenia = encriptar($(txtLoginContrasenia).val());
 
 	$.ajax({
-	   url: BASE_URL + 'usuario/validar?usuario=' + usuario + '&contrasenia=' + contrasenia, 
+	   url: BASE_URL + 'usuario/validar', 
 	   type: "POST", 
 	   //data: 'data=' + JSON.stringify(usuario), 
 	   async: false, 
-	   success: function(data) {
-	   		var rpta = JSON.parse(data);
-
+	   contentType: 'application/json; charset=utf-8',
+		dataType: 'json',
+		data : JSON.stringify(usuario), 
+	   success: function(rpta) {
 	   		if(rpta['tipo_mensaje']=='error'){
 	   			$('#mensajeLogin').removeClass('success');
 	   			$('#mensajeLogin').removeClass('oculto');
