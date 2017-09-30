@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost/parcial/';
+const BASE_URL = 'http://45.55.64.102/parcial/';
 
 $(document).ready(function() {
     $.ajax({
@@ -131,6 +131,7 @@ function eliminarDepartamento(departamentoId, fila){
 	   async: false, 
 	   contentType: 'application/json; charset=utf-8',
     	dataType: 'json',
+crossDomain: true,
 	   data : JSON.stringify(departamento), 
 	   success: function(data) {
 	   		var rpta = data;
@@ -156,6 +157,7 @@ function crearDepartamento(departamentoNombre, fila){
 	   async: false, 
 	   contentType: 'application/json; charset=utf-8',
     	dataType: 'json',
+crossDomain: true,
 	   data : JSON.stringify(departamento), 
 	   success: function(data) {
 	   		var rpta = data;
@@ -184,6 +186,7 @@ function editarDepartamento(departamentoId, departamentoNombre){
 	   url: BASE_URL + 'departamento/editar', 
 	   type: "POST", 
 	   async: false, 
+		crossDomain: true,
 	   contentType: 'application/json; charset=utf-8',
     	dataType: 'json',
 	   data : JSON.stringify(departamento), 

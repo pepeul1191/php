@@ -27,6 +27,25 @@ Flight::route('GET /error/404', array('ErrorController','error_404'));
 //Flight::route('POST /encode', array('CipherController','encode'));
 //Flight::route('POST /decode', array('CipherController','decode'));
 
+
+
+#OPTIONS
+Flight::route('OPTIONS /usuario/correo_repetido', array('UsuarioController','correo_repetido'));
+Flight::route('OPTIONS /usuario/usuario_repetido', array('UsuarioController','usuario_repetido'));
+Flight::route('OPTIONS /cipher/encode', array('CipherController','encode'));
+Flight::route('OPTIONS /usuario/guardar', array('UsuarioController','guardar'));
+Flight::route('OPTIONS /usuario/validar', array('UsuarioController','validar'));
+Flight::route('OPTIONS /departamento/crear', array('DepartamentoController','crear'));
+Flight::route('OPTIONS /departamento/editar', array('DepartamentoController','editar'));
+Flight::route('OPTIONS /departamento/eliminar', array('DepartamentoController','eliminar'));
+Flight::route('OPTIONS /provincia/crear', array('ProvinciaController','crear'));
+Flight::route('OPTIONS /provincia/editar', array('ProvinciaController','editar'));
+Flight::route('OPTIONS /provincia/eliminar', array('ProvinciaController','eliminar'));
+Flight::route('OPTIONS /distrito/crear', array('DistritoController','crear'));
+Flight::route('OPTIONS /distrito/editar', array('DistritoController','editar'));
+Flight::route('OPTIONS /distrito/eliminar', array('DistritoController','eliminar'));
+
+
 #VISTAS
 Flight::route('GET /login', array('ParcialController','login'));
 Flight::route('GET /home', array('ParcialController','home'));

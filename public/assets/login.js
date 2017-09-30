@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost/parcial/';
+const BASE_URL = 'http://45.55.64.102/parcial/';
 
 $( "#linkModal" ).on( "click", function() {
     $('#btnModal').click();
