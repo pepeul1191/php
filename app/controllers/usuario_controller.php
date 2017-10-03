@@ -4,7 +4,8 @@ class UsuarioController extends Controller
 {
     public static function correo_repetido()
     {
-        $correo = Flight::request()->data['correo'];
+        $body = json_decode(Flight::request()->getBody()); 
+        $correo = $body->{'correo'};
         $rpta = null;
 
         try {
@@ -22,7 +23,8 @@ class UsuarioController extends Controller
 
     public static function usuario_repetido()
     {
-        $usuario = Flight::request()->data['usuario'];
+        $body = json_decode(Flight::request()->getBody()); 
+        $usuario = $body->{'usuario'};
         $rpta = null;
 
         try {
@@ -40,9 +42,10 @@ class UsuarioController extends Controller
 
     public static function guardar()
     {
-        $usuario_nombre =Flight::request()->data['usuario'];
-        $correo = Flight::request()->data['correo']; 
-        $contrasenia = Flight::request()->data['contrasenia'];
+        $body = json_decode(Flight::request()->getBody()); 
+        $usuario_nombre =$body->{'usuario'};
+        $correo = $body->{'correo'}; 
+        $contrasenia = $body->{'contrasenia'};
         $rpta = null;
 
         try {
@@ -63,8 +66,9 @@ class UsuarioController extends Controller
 
     public static function validar()
     {
-        $usuario = Flight::request()->data['usuario'];
-        $contrasenia = Flight::request()->data['contrasenia'];
+        $body = json_decode(Flight::request()->getBody()); 
+        $usuario = $body->{'usuario'};
+        $contrasenia = $body->{'contrasenia'};
         $rpta = null;
 
         try {

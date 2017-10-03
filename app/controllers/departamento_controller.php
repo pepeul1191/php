@@ -13,7 +13,7 @@ class DepartamentoController extends Controller
 
 		try {
 			$body = json_decode(Flight::request()->getBody()); 
-			$nombre = $body['nombre'];
+			$nombre = $body->{'nombre'};
 			$departamento = Model::factory('Departamento')->create();
 
 			$departamento->nombre = $nombre;
@@ -35,9 +35,9 @@ class DepartamentoController extends Controller
 		$rpta = null;
 
 		try {
-			$data = json_decode(Flight::request()->data['data']);
-			$id = Flight::request()->data['id'];
-			$nombre = Flight::request()->data['nombre'];
+			$body = json_decode(Flight::request()->getBody()); 
+			$id = $body->{'id'}; 
+			$nombre = $body->{'nombre'}; 
 
 			$departamento = Model::factory('Departamento')->find_one($id);
 			$departamento->nombre = $nombre;
@@ -58,7 +58,8 @@ class DepartamentoController extends Controller
 		$rpta = null;
 
 		try {
-			$id = Flight::request()->query['id'];
+			$body = json_decode(Flight::request()->getBody()); 
+			$id = $body->{'id'}; 
 
 			$departamento = Model::factory('Departamento')->find_one($id);
 			$departamento->delete();

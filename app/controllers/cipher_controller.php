@@ -7,7 +7,7 @@ class CipherController
         //$key = Flight::request()->query['key'];
         $key = KEY;
         $body = json_decode(Flight::request()->getBody()); 
-        $texto = $body['texto'];
+        $texto = $body->{'texto'};
         $securekey = hash('sha256',$key,TRUE);
         $iv = mcrypt_create_iv(16);
 
